@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Production
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build & Deploy
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -19,7 +19,7 @@ jobs:
           USER_NAME: ${{secrets.USER_NAME}}
 
         run: |
-          echo "Deploying to EC2"
+          echo "Deploying to Droplet"
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${{ secrets.USER_NAME }}@${{ secrets.SSH_HOST }} '
           cd /root/quiz-at-ease &&
