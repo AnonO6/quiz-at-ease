@@ -40,7 +40,7 @@ const DetailsDialog = (props: Props) => {
               <div className="grid justify-around grid-cols-4 mt-2 gap-y-3">
                 <div className="flex items-center gap-2">
                   <Image alt="Aiven" src="/aiven.png" width={35} height={35} />
-                  <span className="">Aiven</span>
+                  <span className="hidden md:block lg:block">Aiven</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -49,7 +49,7 @@ const DetailsDialog = (props: Props) => {
                     width={35}
                     height={35}
                   />
-                  <span className="">Next.js</span>
+                  <span className="hidden md:block lg:block">Next.js</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -58,7 +58,7 @@ const DetailsDialog = (props: Props) => {
                     width={35}
                     height={35}
                   />
-                  <span className="">Tailwind</span>
+                  <span className="hidden md:block lg:block">Tailwind</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -67,7 +67,7 @@ const DetailsDialog = (props: Props) => {
                     width={30}
                     height={30}
                   />
-                  <span className="">NextAuth</span>
+                  <span className="hidden md:block lg:block">NextAuth</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -76,7 +76,7 @@ const DetailsDialog = (props: Props) => {
                     width={30}
                     height={30}
                   />
-                  <span className="">OpenAI</span>
+                  <span className="hidden md:block lg:block">OpenAI</span>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -86,7 +86,7 @@ const DetailsDialog = (props: Props) => {
                     width={30}
                     height={30}
                   />
-                  <span className="">React Query</span>
+                  <span className="hidden md:block lg:block">React Query</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -95,7 +95,7 @@ const DetailsDialog = (props: Props) => {
                     width={30}
                     height={30}
                   />
-                  <span className="">Prisma</span>
+                  <span className="hidden md:block lg:block">Prisma</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -104,7 +104,7 @@ const DetailsDialog = (props: Props) => {
                     width={30}
                     height={30}
                   />
-                  <span className="">TypeScript</span>
+                  <span className="hidden md:block lg:block">TypeScript</span>
                 </div>
               </div>
             </p>
@@ -118,7 +118,9 @@ const DetailsDialog = (props: Props) => {
                     width={35}
                     height={35}
                   />
-                  <span className="">Digital Ocean</span>
+                  <span className="hidden md:block lg:block">
+                    Digital Ocean
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -127,11 +129,11 @@ const DetailsDialog = (props: Props) => {
                     width={35}
                     height={35}
                   />
-                  <span className="">Docker</span>
+                  <span className="hidden md:block lg:block">Docker</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image alt="Nginx" src="/nginx.svg" width={35} height={35} />
-                  <span className="">Nginx</span>
+                  <span className="hidden md:block lg:block">Nginx</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -140,13 +142,13 @@ const DetailsDialog = (props: Props) => {
                     width={30}
                     height={40}
                   />
-                  <span className="">certbot</span>
+                  <span className="hidden md:block lg:block">certbot</span>
                 </div>
               </div>
             </p>
             <p className="my-2 font-semibold">
               <h4 className="text-base font-semibold mb-1">
-                No downtime CI/CD ensured using{" "}
+                No downtime CI/CD ensured using
               </h4>
               <div className="grid justify-around grid-cols-4 mt-2 gap-y-3">
                 <div className="flex items-center gap-2">
