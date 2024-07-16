@@ -10,7 +10,7 @@ const HistoryCard = (props: Props) => {
   const router = useRouter();
   return (
     <Card
-      className="hover:cursor-pointer hover:opacity-75"
+      className="border-black transform transition duration-500 hover:scale-105 hover:shadow-xl"
       onClick={() => {
         router.push("/history");
       }}

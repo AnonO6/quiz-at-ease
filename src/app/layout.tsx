@@ -4,6 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import bgimage from "../../public/triippybg.jpg";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
