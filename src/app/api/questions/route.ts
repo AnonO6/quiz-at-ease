@@ -3,6 +3,17 @@ import { getAuthSession } from "@/lib/nextauth";
 import { getQuestionsSchema } from "@/schemas/questions";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
+import { z } from "zod";
+import { createOpenAI } from "@ai-sdk/openai";
+import { generateObject } from "ai";
+
+const openai = createOpenAI({
+  // custom settings, e.g.
+  apiKey: process.env.OPENAI_API_KEY,
+  compatibility: "strict", // strict mode, enable when using the OpenAI API
+});
+
+const model = openai("gpt-4o");
 
 export const runtime = "nodejs";
 export const maxDuration = 500;
@@ -22,31 +33,50 @@ export async function POST(req: Request, res: Response) {
     const body = await req.json();
     const { amount, topic, type } = getQuestionsSchema.parse(body);
     let questions: any;
+
     if (type === "open_ended") {
-      questions = await strict_output(
-        "You are a helpful AI that is able to generate a pair of question and answers, the length of each answer should not be more than 15 words, store all the pairs of answers and questions in a JSON array",
-        new Array(amount).fill(
-          `You are to generate a random hard open-ended questions about ${topic}`
-        ),
-        {
-          question: "question",
-          answer: "answer with max length of 15 words",
-        }
-      );
+      const result = await generateObject({
+        model: model,
+        schema: z.object({
+          questions: z.array(
+            z.object({
+              question: z.string(),
+              answer: z.string(),
+            })
+          ),
+        }),
+
+        system: `You are an expert quiz creator. Create a did quiz for the given topic.
+        such that the questions should be challenging and fun Each question should have an answer within 15 words 
+        the answer is open ended. `,
+
+        prompt: `Create a quiz for the : ${topic} with ${amount} questions `,
+      });
+
+      questions = result.object.questions;
     } else if (type === "mcq") {
-      questions = await strict_output(
-        "You are a helpful AI that is able to generate mcq questions and answers, the length of each answer should not be more than 15 words, store all answers and questions and options in a JSON array",
-        new Array(amount).fill(
-          `You are to generate a random hard mcq question about ${topic}`
-        ),
-        {
-          question: "question",
-          answer: "answer with max length of 15 words",
-          option1: "option1 with max length of 15 words",
-          option2: "option2 with max length of 15 words",
-          option3: "option3 with max length of 15 words",
-        }
-      );
+      const result = await generateObject({
+        model: model,
+        schema: z.object({
+          questions: z.array(
+            z.object({
+              question: z.string(),
+              answer: z.string(),
+              option1: z.string(),
+              option2: z.string(),
+              option3: z.string(),
+            })
+          ),
+        }),
+
+        system: `You are an expert quiz creator . Create a did quiz for the given topic.
+        such that the questions should be challenging and fun Each question should have an answer and options`,
+
+        prompt: `Create a quiz for the : ${topic} with ${amount} questions `,
+      });
+
+      questions = result.object.questions;
+      console.log(questions);
     }
     return NextResponse.json(
       {
